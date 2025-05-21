@@ -63,11 +63,16 @@ const productAttributesConfig = {
             const siblingVariants = masterProduct.variants;
 
             siblingVariants.toArray().forEach(function (siblingVariant) {
-                Logger.info('Processing sibling variant with ID: {0}', siblingVariant.ID);
-                if (siblingVariant.custom && siblingVariant.custom.size) {
-                    Logger.info('Adding size value: {0}', siblingVariant.custom.size);
-                    sizeValues.add(siblingVariant.custom.size);
-                }
+              Logger.info('Processing sibling variant with ID: {0}', siblingVariant.ID);
+              var siblingColor = siblingVariant.custom && siblingVariant.custom.color;
+              var siblingSize = siblingVariant.custom && siblingVariant.custom.size;
+              var currentColor = product.custom && product.custom.color;
+              if (siblingColor && siblingSize && currentColor) {
+                  if (siblingColor === currentColor) {
+                      Logger.info('Adding size value: {0}', siblingSize);
+                      sizeValues.add(siblingSize);
+                  }
+              }
             });
 
             Logger.info(
