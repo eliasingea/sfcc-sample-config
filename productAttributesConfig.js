@@ -33,10 +33,10 @@ const productAttributesConfig = {
         // Getting color value for variant level indexing
         attribute: function (product) {
             if (!product.isVariant()) {
-                return 'is not variant';
+                return null;
             }
             Logger.info('Processing', JSON.stringify(product));
-            return product.custom.color ? product.custom.color : 'test';
+            return product.custom.color;
         },
         localized: false,
     },
